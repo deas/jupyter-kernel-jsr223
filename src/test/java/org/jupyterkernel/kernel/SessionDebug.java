@@ -60,6 +60,6 @@ public class SessionDebug {
     public void debugMain() throws Exception {
         System.out.println("main");
         String[] args = null;
-        Session.main(args);          
+        Main.main(args);
     }    
 }
