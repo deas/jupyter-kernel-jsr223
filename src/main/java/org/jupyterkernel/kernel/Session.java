@@ -68,7 +68,15 @@ public class Session extends Thread {
 
     boolean restart_kernel_requested = false;
 
-    public Session() {
+    public Session(String kernelName, String connectionFilePath) throws IOException {
+        JSONObject connectionData = readConnectionFile(connectionFilePath);
+        if (Session._DEBUG_) {
+            System.out.println(
+                    "Connection File\n------------------------------------");
+            System.out.println(connectionData.toString(4));
+        }
+
+        this.setKernel(kernelName);
     }
 
     void closeSockets() {
@@ -165,9 +173,7 @@ public class Session extends Thread {
         return true;
     }
 
-    public static JSONObject readConnectionFile(String connectionFilePath) throws
-            FileNotFoundException,
-            IOException {
+    public static JSONObject readConnectionFile(String connectionFilePath) throws IOException {
         if (Session._DEBUG_) {
             System.out.println("ConnectionFilePath: " + connectionFilePath);
         }
@@ -236,7 +242,7 @@ public class Session extends Thread {
             closeSockets();
         }
     }
-
+    /*
     public void runKernel(String kernelName, String connectionFilePath) throws
             InvalidKeyException,
             IOException {
@@ -257,4 +263,5 @@ public class Session extends Thread {
         } catch (InterruptedException e1) {
         }
     }
+    */
 }

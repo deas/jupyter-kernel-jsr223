@@ -32,6 +32,8 @@ public class ConsoleFactory {
                 return new JythonConsole();
             case "clojure":
                 return new ClojureConsole();
+            case "nashorn":
+                return new NashornConsole("nashorn");
             default:
                 return new InteractiveConsole(name);
         }

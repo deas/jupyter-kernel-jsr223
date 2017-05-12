@@ -78,7 +78,12 @@ public class Main extends Thread {
             InvalidKeyException,
             IOException {
         java.util.Map<String, String> newArgs = createArgsMap(args);
-        Session session = new Session();
-        session.runKernel(newArgs.get(PARAM_KERNEL_NAME), newArgs.get(PARAM_CONN_FILE_PATH));
+        Session session = new Session(newArgs.get(PARAM_KERNEL_NAME), newArgs.get(PARAM_CONN_FILE_PATH));
+        session.start();
+        try {
+            session.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
